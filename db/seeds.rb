@@ -1,9 +1,15 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+admin_user = User.create!(name: 'Дмитрий', email: 'bauer-one97@yandex.ru', password: 'qwerty', admin: true)
+regular_user = User.create!(name: 'Антон', email: 'anton@mail.ru', password: 'qwerty')
+
+first_static_plan = NutritionPlan.create!(name: 'Первый стол', description: 'Описание первого стола', static: true)
+second_static_plan = NutritionPlan.create!(name: 'Второй стол', description: 'Описание второго стола', static: true)
+
+products = Product.create!([{ name: 'Говяжий фарш', calorie_content: 100, proteins: 10, fats: 5, carbohydrates: 7 }, { name: 'Тесто', calorie_content: 150, proteins: 10, fats: 5, carbohydrates: 7 }])
+
+meal = Meal.create!(name: 'Пельмени', description: 'Пельмени по царски', recipe: 'Здесь рецепт', category: 1)
+
+MealProduct.create!([{ product: products.first, meal: meal, weight: 100 }, { product: products.last, meal: meal, weight: 50 }])
+
+food_preference = FoodPreference.create!(target_calories: 1000, user: regular_user)
+
+FoodPreferenceProduct.create!(food_preference: food_preference, product: products.first, status: :positive)
