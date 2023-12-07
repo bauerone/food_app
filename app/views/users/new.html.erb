@@ -1,33 +1,37 @@
-<h1>Users#new</h1>
-<%= form_with model: @user do |f| %>
-  <% if @user.errors.any? %>
-    <div>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<section class="py-5">
+  <div class="container px-5">
+    <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+      <div class="text-center mb-5">
+        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-box-arrow-in-right"></i></div>
+        <h1 class="fw-bolder">Регистрация</h1>
+        <p class="lead fw-normal text-muted mb-0">Давайте приступим!</p>
+      </div>
+      <div class="row gx-5 justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+          <%= form_with model: @user, id: "contactForm" do |f| %>
+            <div class="form-floating mb-3">
+              <%= f.text_field :name, class: "form-control", placeholder: "Введите имя" %>
+              <label for="name">Имя</label>
+            </div>
+            <div class="form-floating mb-3">
+              <%= f.email_field :email, class: "form-control", placeholder: "name@example.com" %>
+              <label for="email">Почтовый адрес</label>
+            </div>
+            <div class="form-floating mb-3">
+              <%= f.password_field :password, class: "form-control", placeholder: "******" %>
+              <label for="password">Пароль</label>
+            </div>
+            <div class="form-floating mb-3">
+              <%= f.password_field :password_confirmation, class: "form-control", placeholder: "******" %>
+              <label for="phone">Подтверждение пароля</label>
+            </div>
+            <div class="d-grid">
+              <%= f.submit class: "btn btn-primary btn-lg", value: "Зарегистрироваться" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
-  <div>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
   </div>
-  <div>
-    <%= f.label :email %><br>
-    <%= f.email_field :email %>
-  </div>
-  <div>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
+</section>
 
