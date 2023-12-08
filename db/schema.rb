@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_05_200044) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_08_193651) do
   create_table "food_preference_products", force: :cascade do |t|
     t.integer "food_preference_id", null: false
     t.integer "product_id", null: false
@@ -49,6 +49,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_200044) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "nutrition_plan_meals", force: :cascade do |t|
+    t.integer "nutrition_plan_id", null: false
+    t.integer "meal_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meal_id"], name: "index_nutrition_plan_meals_on_meal_id"
+    t.index ["nutrition_plan_id"], name: "index_nutrition_plan_meals_on_nutrition_plan_id"
+  end
+
   create_table "nutrition_plans", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
@@ -82,10 +91,22 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_05_200044) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "weight_measures", force: :cascade do |t|
+    t.date "measure_date"
+    t.float "weight"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_weight_measures_on_user_id"
+  end
+
   add_foreign_key "food_preference_products", "food_preferences"
   add_foreign_key "food_preference_products", "products"
   add_foreign_key "food_preferences", "users"
   add_foreign_key "meal_products", "meals"
   add_foreign_key "meal_products", "products"
+  add_foreign_key "nutrition_plan_meals", "meals"
+  add_foreign_key "nutrition_plan_meals", "nutrition_plans"
   add_foreign_key "nutrition_plans", "users"
+  add_foreign_key "weight_measures", "users"
 end
