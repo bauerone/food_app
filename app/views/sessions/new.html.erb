@@ -1,14 +1,28 @@
-<h1>Login page</h1>
-<%= form_with model: @user, url: sessions_path do |f| %>
-  <div>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+<section class="py-5">
+  <div class="container px-5">
+    <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+      <div class="text-center mb-5">
+        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-box-arrow-in-right"></i></div>
+        <h1 class="fw-bolder">Авторизация</h1>
+        <p class="lead fw-normal text-muted mb-0">С возвращением!</p>
+      </div>
+      <div class="row gx-5 justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+          <%= form_with model: @user, id: "contactForm", url: sessions_path do |f| %>
+            <div class="form-floating mb-3">
+              <%= f.email_field :email, class: "form-control", placeholder: "name@example.com" %>
+              <label for="email">Почтовый адрес</label>
+            </div>
+            <div class="form-floating mb-3">
+              <%= f.password_field :password, class: "form-control", placeholder: "******" %>
+              <label for="password">Пароль</label>
+            </div>
+            <div class="d-grid">
+              <%= f.submit class: "btn btn-primary btn-lg", value: "Войти" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-  <p>
-    <%= f.submit 'Login' %>
-  </p>
-<% end %>
+</section>
