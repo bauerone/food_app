@@ -12,6 +12,15 @@ class MealsController < ApplicationController
   end
 
   def create
+    @meal = Meal.new(meal_params)
+
+    if @meal.save
+      flash[:notice] = "Ваш рецепт отправлен на модерацию"
+      redirect_to meals_path
+    else
+      flash[:alert] = "К сожалению не получается создать рецепт"
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -24,5 +33,11 @@ class MealsController < ApplicationController
 
   def destroy
     @meal = Meal.find(params[:id])
+  end
+
+  private
+
+  def meal_params
+    params.require(:meal).permit(:name, :description, :recipe, :category, :image)
   end
 end

@@ -7,5 +7,16 @@ class Meal < ApplicationRecord
   has_many :nutrition_plan_meals
   has_many :nutrition_plan, through: :nutrition_plan_meals
 
+  has_one_attached :image
+
   enum category: %i[breakfast lunch dinner snack]
+
+  def self.localized_categories
+    {
+      breakfast: 'Завтрак',
+      lunch: 'Обед',
+      dinner: 'Ужин',
+      snack: 'Перекус'
+    }
+  end
 end

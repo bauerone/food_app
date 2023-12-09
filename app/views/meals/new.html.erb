@@ -21,7 +21,10 @@
               <%= f.text_area :recipe, class: "form-control", placeholder: "Рецепт", style: "height: 10rem" %>
               <label for="recipe">Рецепт</label>
             </div>
-            <%= f.select :category, Meal.categories.to_a, { include_blank: true }, { class: "form-select form-select-lg mb-3", prompt: "Категория" } %>
+            <%= f.select :category, Meal.localized_categories.to_a.map(&:reverse), { include_blank: true }, { class: "form-select form-select-lg mb-3", prompt: "Категория" } %>
+            <div class="form-floating mb-3">
+              <%= f.file_field :image %>
+            </div>
             <div class="d-grid">
               <%= f.submit class: "btn btn-primary btn-lg", value: "Добавить блюдо" %>
             </div>
