@@ -4,4 +4,6 @@ class Product < ApplicationRecord
 
   has_many :food_preference_products
   has_many :food_preferences, through: :food_preference_products
+
+  has_one_attached :image
 end

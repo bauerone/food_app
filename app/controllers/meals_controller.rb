@@ -9,6 +9,7 @@ class MealsController < ApplicationController
 
   def new
     @meal = Meal.new
+    @products = Product.where(verified: true)
   end
 
   def create

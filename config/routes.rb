@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'products/index'
+  get 'products/show'
+  get 'products/new'
+  get 'products/create'
+  get 'products/edit'
+  get 'products/update'
+  get 'products/destroy'
   root 'main#index'
   get 'main/secret'
   get 'profile', to: 'users#show'
