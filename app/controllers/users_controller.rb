@@ -3,6 +3,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def show
+    redirect_to root_path unless current_user
+  end
+
   def new
     @user = User.new
   end

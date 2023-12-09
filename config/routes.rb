@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'main#index'
   get 'main/secret'
+  get 'profile', to: 'users#show'
 
   resources :users, only: %i[index new create]
   resources :sessions, only: %i[new create destroy]
