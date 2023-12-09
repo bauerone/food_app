@@ -25,6 +25,13 @@
             <div class="form-floating mb-3">
               <%= f.file_field :image %>
             </div>
+
+            <h3>Список продуктов</h3>
+
+            <div id="products-list"></div>
+  
+            <%= link_to "Добавить продукт", add_product_path, method: :post, class: 'btn btn-success' %>
+            </br></br>
             <div class="d-grid">
               <%= f.submit class: "btn btn-primary btn-lg", value: "Добавить блюдо" %>
             </div>

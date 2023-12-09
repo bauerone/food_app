@@ -9,7 +9,6 @@ class MealsController < ApplicationController
 
   def new
     @meal = Meal.new
-    @products = Product.where(verified: true)
   end
 
   def create
@@ -34,6 +33,11 @@ class MealsController < ApplicationController
 
   def destroy
     @meal = Meal.find(params[:id])
+  end
+
+  def add_product
+    @products = Product.where(verified: true)
+    p @products
   end
 
   private

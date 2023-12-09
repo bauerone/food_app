@@ -1,0 +1,13 @@
+<div class="form-floating mb-3">
+  <%= select_tag "product_name_#{SecureRandom.uuid}", options_for_select(@products.pluck(:name)), include_blank: true, class: "form-select form-select-lg mb-3" %>
+  <label for="description">Наименование продукта</label>
+</div>
+
+<div class="form-floating mb-3">
+  <%= number_field_tag "product_weight_#{SecureRandom.uuid}", "", class: "form-control", placeholder: "Вес продукта" %>
+  <label for="description">Вес продукта</label>
+</div>
+
+<div class="divider"></div>
+
+</br>
