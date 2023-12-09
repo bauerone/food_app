@@ -1,0 +1,36 @@
+<section class="py-5">
+  <div class="container px-5">
+    <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+      <div class="text-center mb-5">
+        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-box-arrow-in-right"></i></div>
+        <h1 class="fw-bolder">Добавление нового блюда</h1>
+        <p class="lead fw-normal text-muted mb-0">Давайте приступим!</p>
+      </div>
+      <div class="row gx-5 justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+          <%= form_with model: @meal, id: "contactForm" do |f| %>
+            <div class="form-floating mb-3">
+              <%= f.text_field :name, class: "form-control", placeholder: "Наименование" %>
+              <label for="name">Наименование</label>
+            </div>
+            <div class="form-floating mb-3">
+              <%= f.text_field :description, class: "form-control", placeholder: "Описание" %>
+              <label for="description">Описание</label>
+            </div>
+            <div class="form-floating mb-3">
+              <%= f.text_field :recipe, class: "form-control", placeholder: "Рецепт" %>
+              <label for="recipe">Рецепт</label>
+            </div>
+            <div class="form-floating mb-3">
+              <%= f.select :category, Meal.categories.to_a, class: "form-select form-select-lg mb-3", placeholder: "Категория" %>
+            </div>
+            <div class="d-grid">
+              <%= f.submit class: "btn btn-primary btn-lg", value: "Создать блюдо" %>
+            </div>
+            <%= f.check_box :tag_ids, {multiple: true}, 1, nil %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
