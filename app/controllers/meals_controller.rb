@@ -15,6 +15,7 @@ class MealsController < ApplicationController
     @meal = Meal.new(meal_params)
 
     if @meal.save
+      add_products(@meal)
       flash[:notice] = "Ваш рецепт отправлен на модерацию"
       redirect_to meals_path
     else
@@ -37,12 +38,24 @@ class MealsController < ApplicationController
 
   def add_product
     @products = Product.where(verified: true)
-    p @products
   end
 
   private
 
   def meal_params
     params.require(:meal).permit(:name, :description, :recipe, :category, :image)
+  end
+
+  def add_products(meal)
+    raw_data = JSON.parse(params.to_json)
+
+    product_names = raw_data.select { |key, _| key.starts_with?('product_name') }.values
+    product_weights = raw_data.select { |key, _| key.starts_with?('product_weight')}.values
+
+    products = product_names.zip(product_weights)
+
+    products.each do |product|
+      MealProduct.create(meal: meal, product: Product.find_by(name: product.first), weight: product.second)
+    end
   end
 end
