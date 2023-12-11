@@ -19,4 +19,10 @@ class Meal < ApplicationRecord
       snack: 'Перекус'
     }
   end
+
+  def calorie_content
+    products.select('products.*, meal_products.weight as weight').map do |product|
+      product.calorie_content * (product.weight / 100)
+    end.sum
+  end
 end
