@@ -1,1 +1,11 @@
 Здесь будет личный профиль пользователя <%= current_user.name %>
+
+
+<p>Вес</p>
+<%= current_user.current_weight %>
+
+<p>Избранные продукты</p>
+<%= current_user.favourite_products.count %>
+
+<p>Заблокированные продукты</p>
+<%= current_user.blocked_products.count %>
