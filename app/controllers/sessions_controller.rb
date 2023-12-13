@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      flash[:alert] = "Login failed"
+      flash[:alert] = "Не получилось пройти авторизацию. Проверьте логин/пароль"
       redirect_to new_session_path
     end
   end

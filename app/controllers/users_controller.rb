@@ -21,10 +21,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:notice] = "User created successfully"
+      flash[:notice] = "Регистрация прошла успешно"
       redirect_to users_path
     else
-      flash[:alert] = "User not created"
+      flash[:alert] = "Не получилось пройти регистрацию"
       render :new, status: :unprocessable_entity
     end
   end
