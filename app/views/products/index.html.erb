@@ -13,6 +13,7 @@
               <th scope="col">Белки</th>
               <th scope="col">Жиры</th>
               <th scope="col">Углеводы</th>
+              <th scope="col">Статус</th>
             </tr>
           </thead>
           <tbody>
@@ -23,6 +24,13 @@
                 <td><%= product.proteins %></td>
                 <td><%= product.fats %></td>
                 <td><%= product.carbohydrates %></td>
+                <td> 
+                  <% if current_user.blocked_products.ids.include?(product.id) %>
+                    <%= link_to 'Разблокировать', unblock_product_path(product_id: product.id), method: :post, class: 'btn btn-outline-success' %>
+                  <% else %>
+                    <%= link_to 'Заблокировать', block_product_path(product_id: product.id), method: :post, class: 'btn btn-outline-danger' %>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>

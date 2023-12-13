@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'authored_meals', to: 'meals#authored_meals'
 
   post 'add_product', to: 'meals#add_product'
+  post 'block_product', to: 'products#block_product'
+  post 'unblock_product', to: 'products#unblock_product'
   post 'add_weight_measure', to: 'users#add_weight_measure'
   post 'calculate_nutrition_plan', to: 'users#calculate_nutrition_plan'
 

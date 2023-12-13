@@ -32,6 +32,18 @@ class ProductsController < ApplicationController
   def destroy
   end
 
+  def block_product
+    FoodPreferenceProduct.create!(food_preference: current_user.food_preference, status: :negative, product_id: params[:product_id])
+
+    redirect_to products_path
+  end
+
+  def unblock_product
+    FoodPreferenceProduct.find_by(food_preference: current_user.food_preference, status: :negative, product_id: params[:product_id]).destroy
+
+    redirect_to products_path
+  end
+
   private
 
   def product_params
