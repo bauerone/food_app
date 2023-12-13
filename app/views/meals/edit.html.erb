@@ -1,2 +1,43 @@
-<h1>Meals#edit</h1>
-<p>Find me in app/views/meals/edit.html.erb</p>
+<section class="py-5">
+  <div class="container px-5">
+    <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+      <div class="text-center mb-5">
+        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-box-arrow-in-right"></i></div>
+        <h1 class="fw-bolder">Добавление нового блюда</h1>
+        <p class="lead fw-normal text-muted mb-0">Опишите подробнее ваш рецепт</p>
+      </div>
+      <div class="row gx-5 justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+          <%= form_with model: @meal, id: "contactForm" do |f| %>
+            <div class="form-floating mb-3">
+              <%= f.text_field :name, class: "form-control", placeholder: "Наименование" %>
+              <label for="name">Наименование</label>
+            </div>
+            <div class="form-floating mb-3">
+              <%= f.text_field :description, class: "form-control", placeholder: "Описание" %>
+              <label for="description">Описание</label>
+            </div>
+            <div class="form-floating mb-3">
+              <%= f.text_area :recipe, class: "form-control", placeholder: "Рецепт", style: "height: 10rem" %>
+              <label for="recipe">Рецепт</label>
+            </div>
+            <%= f.select :category, Meal.localized_categories.to_a.map(&:reverse), { include_blank: true }, { class: "form-select form-select-lg mb-3", prompt: "Категория" } %>
+            <div class="form-floating mb-3">
+              <%= f.file_field :image %>
+            </div>
+
+            <h3>Список продуктов</h3>
+
+            <div id="products-list"></div>
+  
+            <%= link_to "Добавить продукт", add_product_path, method: :post, class: 'btn btn-success' %>
+            </br></br>
+            <div class="d-grid">
+              <%= f.submit class: "btn btn-primary btn-lg", value: "Добавить блюдо" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

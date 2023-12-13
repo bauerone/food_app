@@ -34,7 +34,16 @@ class MealsController < ApplicationController
   end
 
   def update
-    
+    @meal = Meal.new(meal_params)
+
+    if @meal.save
+      add_products(@meal)
+      flash[:notice] = "Ваш рецепт отправлен на модерацию"
+      redirect_to meals_path
+    else
+      flash[:alert] = "К сожалению не получается изменить рецепт"
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -52,6 +61,8 @@ class MealsController < ApplicationController
   end
 
   def add_products(meal)
+    MealProduct.where(meal: meal).destroy_all
+
     raw_data = JSON.parse(params.to_json)
 
     product_names = raw_data.select { |key, _| key.starts_with?('product_name') }.values
