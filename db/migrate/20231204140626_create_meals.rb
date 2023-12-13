@@ -6,6 +6,7 @@ class CreateMeals < ActiveRecord::Migration[7.1]
       t.integer :category, null: false
       t.text :recipe, null: false
       t.boolean :verified, default: false
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

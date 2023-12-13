@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   post 'add_product', to: 'meals#add_product'
   post 'add_weight_measure', to: 'users#add_weight_measure'
+  post 'calculate_nutrition_plan', to: 'users#calculate_nutrition_plan'
 
   resources :users, only: %i[index new create]
   resources :sessions, only: %i[new create destroy]

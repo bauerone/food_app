@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_one :food_preference
   has_many :nutrition_plans
   has_many :weight_measures
+  has_many :meals
 
   def current_weight
     weight_measures.last&.weight

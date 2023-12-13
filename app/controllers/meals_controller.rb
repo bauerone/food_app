@@ -13,6 +13,7 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_params)
+    @meal.user_id = current_user.id
 
     if @meal.save
       add_products(@meal)

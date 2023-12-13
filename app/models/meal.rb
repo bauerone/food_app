@@ -1,4 +1,5 @@
 class Meal < ApplicationRecord
+  belongs_to :user, required: false
   belongs_to :nutrition_plan, required: false
 
   has_many :meal_products

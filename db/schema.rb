@@ -73,8 +73,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_09_132214) do
     t.integer "category", null: false
     t.text "recipe", null: false
     t.boolean "verified", default: false
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_meals_on_user_id"
   end
 
   create_table "nutrition_plan_meals", force: :cascade do |t|
@@ -135,6 +137,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_09_132214) do
   add_foreign_key "food_preferences", "users"
   add_foreign_key "meal_products", "meals"
   add_foreign_key "meal_products", "products"
+  add_foreign_key "meals", "users"
   add_foreign_key "nutrition_plan_meals", "meals"
   add_foreign_key "nutrition_plan_meals", "nutrition_plans"
   add_foreign_key "nutrition_plans", "users"
