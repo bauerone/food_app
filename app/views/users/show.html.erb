@@ -1,16 +1,31 @@
-Здесь будет личный профиль пользователя <%= current_user.name %>
-
-
-<p>Вес</p>
-<%= current_user.current_weight %>
-
-<p>Избранные продукты</p>
-<%= current_user.favourite_products.count %>
-
-<p>Заблокированные продукты</p>
-<%= current_user.blocked_products.count %>
-
 <div class="container">
+  <h1>План питания</h1>
+
+  <%= week_calendar do |date| %>
+    Дата: <%= date %>
+
+    <% @nutrition_plans.find_by(day_of_reception: date).meals.each do |meal| %>
+      </br>
+
+      <div class="card">
+        <div class="card-header">
+          <%= Meal.localized_categories[meal.category.to_sym] %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= meal.name %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= meal.description %></h6>
+          <%= link_to 'Подробнее', meal, class: "card-link" %>
+        </div>
+        <div class="card-footer text-muted">
+          Калории: <%= meal.calorie_content %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  </br></br>
+  <h1>Контроль веса</h1>
+
   <div class="row">
     <div class="col">
       <div class="card" style="width: 35rem;">
@@ -42,25 +57,11 @@
     </div>
   </div>
 
-  <%= week_calendar do |date| %>
-    Дата: <%= date %>
+  </br></br>
 
-    <% @nutrition_plans.find_by(day_of_reception: date).meals.each do |meal| %>
-      </br>
+  <h1>Заблокированные продукты</h1>
 
-      <div class="card">
-        <div class="card-header">
-          <%= Meal.localized_categories[meal.category.to_sym] %>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title"><%= meal.name %></h5>
-          <h6 class="card-subtitle mb-2 text-muted"><%= meal.description %></h6>
-          <%= link_to 'Подробнее', meal, class: "card-link" %>
-        </div>
-        <div class="card-footer text-muted">
-          Калории: <%= meal.calorie_content %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
+  <% current_user.blocked_products.each do |blocked_product| %>
+    <%= blocked_product %>
+  <% end%>
 </div>
