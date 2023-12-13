@@ -18,6 +18,7 @@ gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 gem "chartkick"
 gem "simple_calendar", "~> 2.4"
+gem "kaminari"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]

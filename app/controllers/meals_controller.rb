@@ -1,6 +1,6 @@
 class MealsController < ApplicationController
   def index
-    @meals = Meal.where(verified: true)
+    @meals = Meal.where(verified: true).page(params[:page]).per(1)
   end
 
   def show
