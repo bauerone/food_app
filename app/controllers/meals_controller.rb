@@ -1,6 +1,6 @@
 class MealsController < ApplicationController
   def index
-    @meals = Meal.all
+    @meals = Meal.where(verified: true)
   end
 
   def show

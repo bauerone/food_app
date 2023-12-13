@@ -9,14 +9,13 @@ class Meal < ApplicationRecord
 
   has_one_attached :image
 
-  enum category: %i[breakfast lunch dinner snack]
+  enum category: %i[breakfast lunch dinner]
 
   def self.localized_categories
     {
       breakfast: 'Завтрак',
       lunch: 'Обед',
-      dinner: 'Ужин',
-      snack: 'Перекус'
+      dinner: 'Ужин'
     }
   end
 
