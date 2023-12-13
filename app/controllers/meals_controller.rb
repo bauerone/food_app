@@ -3,6 +3,10 @@ class MealsController < ApplicationController
     @meals = Meal.where(verified: true).page(params[:page]).per(1)
   end
 
+  def authored_meals
+    @meals = Meal.where(user: current_user).page(params[:page])
+  end
+
   def show
     @meal = Meal.find(params[:id])
   end

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'main#index'
   get 'main/secret'
   get 'profile', to: 'users#show'
+  get 'authored_meals', to: 'meals#authored_meals'
 
   post 'add_product', to: 'meals#add_product'
   post 'add_weight_measure', to: 'users#add_weight_measure'
