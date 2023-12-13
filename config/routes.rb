@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :food_preferences
+      resources :food_preference_products
+      resources :meals
+      resources :meal_products
+      resources :nutrition_plans
+      resources :nutrition_plan_meals
+      resources :products
+      resources :users
+      resources :weight_measures
+
+      root to: "food_preferences#index"
+    end
   root 'main#index'
   get 'main/secret'
   get 'profile', to: 'users#show'
