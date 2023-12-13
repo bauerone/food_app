@@ -1,67 +1,76 @@
-<div class="container">
-  <h1>План питания</h1>
-
-  <%= week_calendar do |date| %>
-    Дата: <%= date %>
-
-    <% @nutrition_plans.find_by(day_of_reception: date).meals.each do |meal| %>
-      </br>
-
-      <div class="card">
-        <div class="card-header">
-          <%= Meal.localized_categories[meal.category.to_sym] %>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title"><%= meal.name %></h5>
-          <h6 class="card-subtitle mb-2 text-muted"><%= meal.description %></h6>
-          <%= link_to 'Подробнее', meal, class: "card-link" %>
-        </div>
-        <div class="card-footer text-muted">
-          Калории: <%= meal.calorie_content %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-
-  </br></br>
-  <h1>Контроль веса</h1>
-
-  <div class="row">
-    <div class="col">
-      <div class="card" style="width: 35rem;">
-        <div class="card-body">
-          <h5 class="card-title">Внести данные по текущему весу</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Заполните текущее значение веса</h6>
-          <%= form_with model: @weight_measure, id: "contactForm", url: add_weight_measure_path do |f| %>
-            <div class="form-floating mb-3">
-              <%= f.number_field :weight, class: "form-control", placeholder: "Текущий вес" %>
-              <label for="weight">Текущий вес</label>
-            </div>
-            <div class="d-grid">
-              <%= f.submit class: "btn btn-primary btn-lg", value: "Внести данные" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
+<section class="py-5">
+  <div class="container px-5 mb-5">
+    <div class="text-center mb-5">
+      <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">План питания</span></h1>
     </div>
-    <div class="col">
-      <div class="card" style="width: 35rem;">
-        <div class="card-body">
-          <h5 class="card-title">График изменения веса</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <div id="chart-area">
-            <%= line_chart @chart_data, min: @chart_data.map { |arr| arr.last }.min - 3, max: @chart_data.map { |arr| arr.last }.max + 3 %>
+    
+    <%= week_calendar do |date| %>
+      Дата: <%= date %>
+
+      <% @nutrition_plans.find_by(day_of_reception: date).meals.each do |meal| %>
+        </br>
+
+        <div class="card">
+          <div class="card-header">
+            <%= Meal.localized_categories[meal.category.to_sym] %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= meal.name %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= meal.description %></h6>
+            <%= link_to 'Подробнее', meal, class: "card-link" %>
+          </div>
+          <div class="card-footer text-muted">
+            Калории: <%= meal.calorie_content %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    </br></br>
+
+    <div class="text-center mb-5">
+      <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Контроль веса</span></h1>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card" style="width: 35rem;">
+          <div class="card-body">
+            <h5 class="card-title">Внести данные по текущему весу</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Заполните текущее значение веса</h6>
+            <%= form_with model: @weight_measure, id: "contactForm", url: add_weight_measure_path do |f| %>
+              <div class="form-floating mb-3">
+                <%= f.number_field :weight, class: "form-control", placeholder: "Текущий вес" %>
+                <label for="weight">Текущий вес</label>
+              </div>
+              <div class="d-grid">
+                <%= f.submit class: "btn btn-primary btn-lg", value: "Внести данные" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 35rem;">
+          <div class="card-body">
+            <h5 class="card-title">График изменения веса</h5>
+            <h6 class="card-subtitle mb-2 text-muted">КГ/дата</h6>
+            <div id="chart-area">
+              <%= line_chart @chart_data, min: @chart_data.map { |arr| arr.last }.min - 3, max: @chart_data.map { |arr| arr.last }.max + 3 %>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    </br></br>
+
+    <div class="text-center mb-5">
+      <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Заблокированные продукты</span></h1>
+    </div>
+
+    <% current_user.blocked_products.each do |blocked_product| %>
+      <%= blocked_product %>
+    <% end%>
   </div>
-
-  </br></br>
-
-  <h1>Заблокированные продукты</h1>
-
-  <% current_user.blocked_products.each do |blocked_product| %>
-    <%= blocked_product %>
-  <% end%>
-</div>
+</section>
