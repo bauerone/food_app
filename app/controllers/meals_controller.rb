@@ -1,6 +1,11 @@
 class MealsController < ApplicationController
   def index
-    @meals = Meal.where(verified: true).page(params[:page]).per(1)
+    @meals = Meal.where(verified: true).page(params[:page]).per(5)
+
+    if params[:search].present?
+      key = "%#{params[:search]}%"
+      @meals = @meals.where("name LIKE ?", key)
+    end
   end
 
   def authored_meals
