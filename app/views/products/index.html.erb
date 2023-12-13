@@ -1,2 +1,33 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<section class="py-5">
+	<div class="container px-5 mb-5">
+		<div class="text-center mb-5">
+			<h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Продукты</span></h1>
+		</div>
+		<div class="row gx-5 justify-content-center">
+			<div class="col-lg-11 col-xl-9 col-xxl-8">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Наименование</th>
+              <th scope="col">Кол-во калорий</th>
+              <th scope="col">Белки</th>
+              <th scope="col">Жиры</th>
+              <th scope="col">Углеводы</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @products.each do |product| %>
+              <tr>
+                <td><%= link_to product.name, product %></td>
+                <td><%= product.calorie_content %></td>
+                <td><%= product.proteins %></td>
+                <td><%= product.fats %></td>
+                <td><%= product.carbohydrates %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+		</div>
+	</div>
+</section>
