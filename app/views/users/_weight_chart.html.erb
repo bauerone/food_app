@@ -1,0 +1,3 @@
+<div id="chart-area">
+  <%= line_chart @chart_data, min: @chart_data.map { |arr| arr.last }.min - 3, max: @chart_data.map { |arr| arr.last }.max + 3 %>
+</div>

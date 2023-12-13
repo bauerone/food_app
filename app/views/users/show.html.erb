@@ -9,3 +9,36 @@
 
 <p>Заблокированные продукты</p>
 <%= current_user.blocked_products.count %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card" style="width: 35rem;">
+        <div class="card-body">
+          <h5 class="card-title">Внести данные по текущему весу</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Заполните текущее значение веса</h6>
+          <%= form_with model: @weight_measure, id: "contactForm", url: add_weight_measure_path do |f| %>
+            <div class="form-floating mb-3">
+              <%= f.number_field :weight, class: "form-control", placeholder: "Текущий вес" %>
+              <label for="weight">Текущий вес</label>
+            </div>
+            <div class="d-grid">
+              <%= f.submit class: "btn btn-primary btn-lg", value: "Внести данные" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card" style="width: 35rem;">
+        <div class="card-body">
+          <h5 class="card-title">График изменения веса</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <div id="chart-area">
+            <%= line_chart @chart_data, min: @chart_data.map { |arr| arr.last }.min - 3, max: @chart_data.map { |arr| arr.last }.max + 3 %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

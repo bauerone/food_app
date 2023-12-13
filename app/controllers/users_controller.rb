@@ -5,6 +5,9 @@ class UsersController < ApplicationController
 
   def show
     redirect_to root_path unless current_user
+
+    @chart_data = current_user.weight_measures.pluck(:measure_date, :weight)
+    @weight_measure = WeightMeasure.new
   end
 
   def new
@@ -23,9 +26,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_weight_measure
+    @weight_measure = WeightMeasure.new(measure_date: Date.today,
+                                        weight: weight_measure_params[:weight],
+                                        user: current_user)
+    @weight_measure.save
+    @chart_data = current_user.weight_measures.pluck(:measure_date, :weight)
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def weight_measure_params
+    params.require(:weight_measure).permit(:weight)
   end
 end

@@ -35,7 +35,6 @@ class User < ApplicationRecord
     (Date.today.beginning_of_week..Date.today.end_of_week).map do |day|
       plan_for_day = closest(combinations, target_calories)
       # combinations.delete(plan_for_day)
-      [day, plan_for_day]
 
       plan = NutritionPlan.create!(user: self, name: day, day_of_reception: day, description: 'Автоматически созданный план питания')
       plan_for_day.first.each do |meal_id|

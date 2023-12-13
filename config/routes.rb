@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'profile', to: 'users#show'
 
   post 'add_product', to: 'meals#add_product'
+  post 'add_weight_measure', to: 'users#add_weight_measure'
 
   resources :users, only: %i[index new create]
   resources :sessions, only: %i[new create destroy]
