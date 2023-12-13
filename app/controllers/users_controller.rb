@@ -39,6 +39,8 @@ class UsersController < ApplicationController
 
   def calculate_nutrition_plan
     current_user.calculate_nutrition_plan
+
+    redirect_to profile_path
   end
 
   private
