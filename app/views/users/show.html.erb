@@ -41,4 +41,26 @@
       </div>
     </div>
   </div>
+
+  <%= week_calendar do |date| %>
+    Дата: <%= date %>
+
+    <% @nutrition_plans.find_by(day_of_reception: date).meals.each do |meal| %>
+      </br>
+
+      <div class="card">
+        <div class="card-header">
+          <%= Meal.localized_categories[meal.category.to_sym] %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= meal.name %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= meal.description %></h6>
+          <%= link_to 'Подробнее', meal, class: "card-link" %>
+        </div>
+        <div class="card-footer text-muted">
+          Калории: <%= meal.calorie_content %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>

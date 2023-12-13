@@ -232,6 +232,8 @@ GEM
     ruby-vips (2.2.0)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
+    simple_calendar (2.4.3)
+      rails (>= 3.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -285,6 +287,7 @@ DEPENDENCIES
   rails-erd
   redis (>= 4.0.1)
   rspec-rails (~> 6.1.0)
+  simple_calendar (~> 2.4)
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
