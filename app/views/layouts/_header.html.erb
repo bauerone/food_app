@@ -10,6 +10,9 @@
         <li class="nav-item"><a class="nav-link" href=<%= meals_path %>>Рецепты</a></li>
         <li class="nav-item"><a class="nav-link" href=<%= root_path %>>Планы питания</a></li>
         <li class="nav-item"><a class="nav-link" href=<%= profile_path %>>Профиль</a></li>
+        <% if current_user %>
+          <li class="nav-item"><%= link_to "Выход", session_path(current_user), class: "nav-link", data: { turbo_method: :delete }%></li>
+        <% end %>
       </ul>
     </div>
   </div>

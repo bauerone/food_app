@@ -1,10 +1,6 @@
 class MainController < ApplicationController
-  def index
-  end
+  skip_before_action :require_login
 
-  def secret
-    unless current_user
-      render plain: '401 Unauthorized', status: :unauthorized
-    end
+  def index
   end
 end
