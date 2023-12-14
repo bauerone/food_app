@@ -1,6 +1,11 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.where(verified: true).page(params[:page]).per(20)
+
+    if params[:search].present?
+      key = "%#{params[:search]}%"
+      @products = @products.where("name LIKE ?", key)
+    end
   end
 
   def show
