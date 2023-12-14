@@ -26,6 +26,8 @@ class User < ApplicationRecord
   end
 
   def calculate_nutrition_plan
+    self.nutrition_plans.destroy_all
+
     breakfast = find_meals(:breakfast)
     lunch = find_meals(:lunch)
     dinner = find_meals(:dinner)

@@ -9,6 +9,7 @@
           <thead>
             <tr>
               <th scope="col">Наименование</th>
+              <th scope="col">Изображение</th>
               <th scope="col">Кол-во калорий</th>
               <th scope="col">Белки</th>
               <th scope="col">Жиры</th>
@@ -20,6 +21,7 @@
             <% @products.each do |product| %>
               <tr>
                 <td><%= link_to product.name, product %></td>
+                <td><%= image_tag url_for(product.image.url), width: 100 %></td>
                 <td><%= product.calorie_content %></td>
                 <td><%= product.proteins %></td>
                 <td><%= product.fats %></td>
