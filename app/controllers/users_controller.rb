@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @chart_data = current_user.weight_measures.pluck(:measure_date, :weight)
     @weight_measure = WeightMeasure.new
     @nutrition_plans = current_user.nutrition_plans
+    @food_preference = current_user.food_preference
   end
 
   def new
@@ -43,6 +44,10 @@ class UsersController < ApplicationController
     redirect_to profile_path
   end
 
+  def set_target_calories
+    current_user.food_preference.update!(target_calories_params)
+  end
+
   private
 
   def user_params
@@ -51,5 +56,9 @@ class UsersController < ApplicationController
 
   def weight_measure_params
     params.require(:weight_measure).permit(:weight)
+  end
+
+  def target_calories_params
+    params.require(:food_preference).permit(:target_calories)
   end
 end

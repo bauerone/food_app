@@ -7,8 +7,9 @@
     <% if @nutrition_plans.present? %>
       <%= week_calendar do |date| %>
         Дата: <%= date %>
+        </br>
 
-        <% @nutrition_plans.find_by(day_of_reception: date).meals.each do |meal| %>
+        <% @nutrition_plans.find_by(day_of_reception: date).meals.order(:category).each do |meal| %>
           </br>
 
           <div class="card">
@@ -18,7 +19,7 @@
             <div class="card-body">
               <h5 class="card-title"><%= meal.name %></h5>
               <h6 class="card-subtitle mb-2 text-muted"><%= meal.description %></h6>
-              <%= link_to 'Подробнее', meal, class: "card-link" %>
+              <%= link_to 'Подробнее', meal, class: "btn btn-outline-success" %>
             </div>
             <div class="card-footer text-muted">
               Калории: <%= meal.calorie_content %>
@@ -38,7 +39,7 @@
     </br></br>
 
     <div class="text-center mb-5">
-      <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Контроль веса</span></h1>
+      <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Контроль веса и цели по калориям</span></h1>
     </div>
 
     <div class="row">
@@ -51,6 +52,22 @@
               <div class="form-floating mb-3">
                 <%= f.number_field :weight, class: "form-control", placeholder: "Текущий вес" %>
                 <label for="weight">Текущий вес</label>
+              </div>
+              <div class="d-grid">
+                <%= f.submit class: "btn btn-primary btn-lg", value: "Внести данные" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="card" style="width: 35rem;">
+          <div class="card-body">
+            <h5 class="card-title">Ввод значения цели по калориям</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Введите необходимое число калорий в виде числа</h6>
+            <%= form_with model: @food_preference, id: "contactForm", url: set_target_calories_path, method: :post do |f| %>
+              <div class="form-floating mb-3">
+                <%= f.number_field :target_calories, class: "form-control", placeholder: "Цель по калориям" %>
+                <label for="target_calories">Цель по калориям</label>
               </div>
               <div class="d-grid">
                 <%= f.submit class: "btn btn-primary btn-lg", value: "Внести данные" %>

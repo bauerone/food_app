@@ -1,17 +1,18 @@
 Rails.application.routes.draw do
   namespace :admin do
-      resources :food_preferences
-      resources :food_preference_products
-      resources :meals
-      resources :meal_products
-      resources :nutrition_plans
-      resources :nutrition_plan_meals
-      resources :products
-      resources :users
-      resources :weight_measures
+    resources :food_preferences
+    resources :food_preference_products
+    resources :meals
+    resources :meal_products
+    resources :nutrition_plans
+    resources :nutrition_plan_meals
+    resources :products
+    resources :users
+    resources :weight_measures
 
-      root to: "food_preferences#index"
-    end
+    root to: "food_preferences#index"
+  end
+
   root 'main#index'
   get 'main/secret'
   get 'profile', to: 'users#show'
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   post 'unblock_product', to: 'products#unblock_product'
   post 'add_weight_measure', to: 'users#add_weight_measure'
   post 'calculate_nutrition_plan', to: 'users#calculate_nutrition_plan'
+  post 'set_target_calories', to: 'users#set_target_calories'
 
   resources :users, only: %i[index new create]
   resources :sessions, only: %i[new create destroy]
