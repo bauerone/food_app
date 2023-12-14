@@ -100,8 +100,10 @@
       <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Заблокированные продукты</span></h1>
     </div>
 
-    <% current_user.blocked_products.each do |blocked_product| %>
-      <%= blocked_product %>
-    <% end%>
+    <ul>
+      <% current_user.blocked_products.each do |blocked_product| %>
+        <li><h5><%= blocked_product.name %></h5></li>
+      <% end%>
+    </ul>
   </div>
 </section>

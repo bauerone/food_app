@@ -17,6 +17,6 @@ MealProduct.create!([{ product: products.first, meal: meal, weight: 100 }, { pro
 
 Meal.update_all(verified: true)
 
-food_preference = FoodPreference.create!(target_calories: 1000, user: regular_user)
+food_preference = regular_user.food_preference
 
 FoodPreferenceProduct.create!(food_preference: food_preference, product: products.first, status: :positive)

@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :weight_measures
   has_many :meals
 
+  after_create :create_food_preference
+
   def current_weight
     weight_measures.last&.weight
   end
@@ -55,5 +57,9 @@ class User < ApplicationRecord
 
   def find_meals(category)
     Meal.where(verified: true, category: category).map { |meal| [meal.id, meal.calorie_content] }
+  end
+
+  def create_food_preference
+    FoodPreference.create!(user: self, target_calories: 3000)
   end
 end
