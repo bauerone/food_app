@@ -56,7 +56,10 @@ class User < ApplicationRecord
   end
 
   def find_meals(category)
-    Meal.where(verified: true, category: category).map { |meal| [meal.id, meal.calorie_content] }
+    scope = Meal.joins(:products)
+              .where(verified: true, category: category)
+    scope = scope.where("products.id NOT IN (?)", blocked_products.pluck(:id)) if blocked_products.pluck(:id).present?     
+    scope.map { |meal| [meal.id, meal.calorie_content] }
   end
 
   def create_food_preference
