@@ -14,6 +14,7 @@ class MealsController < ApplicationController
 
   def show
     @meal = Meal.find(params[:id])
+    @products = @meal.products.select('products.*, meal_products.weight as weight')
   end
 
   def new

@@ -1,2 +1,28 @@
-<h1>Meals#show</h1>
-<p>Find me in app/views/meals/show.html.erb</p>
+<section class="py-5">
+  <div class="container px-5">
+    <div class="bg-light rounded-4 py-5 px-4 px-md-5">
+      <div class="text-center mb-5">
+        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-box-arrow-in-right"></i></div>
+        <h1 class="fw-bolder"><%= @meal.name %></h1>
+        <p class="lead fw-normal text-muted mb-0"><%= @meal.description %></p>
+      </div>
+      <div class="row gx-5 justify-content-center">
+        <%= image_tag url_for(@meal.image.url) %>
+        </br></br>
+        <h3>Категория: <%= Meal.localized_categories[@meal.category.to_sym] %></h3>
+        </br>
+        <h3>Количество калорий: <%= @meal.calorie_content %></h3>
+        <h3>Продукты:</h3>
+        <ul>
+          <% @products.each do |product| %>
+            <li><h5><%= product.name %> (<%= product.weight %> грамм)</h5></li>
+          <% end %>
+        </ul>
+
+        <h3>Рецепт: </h3>
+
+        <p><%= @meal.recipe %><p>
+      </div>
+    </div>
+  </div>
+</section>
