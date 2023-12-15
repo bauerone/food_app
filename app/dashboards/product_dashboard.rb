@@ -47,8 +47,6 @@ class ProductDashboard < Administrate::BaseDashboard
     fats
     food_preference_products
     food_preferences
-    image_attachment
-    image_blob
     meal_products
     meals
     name
@@ -68,8 +66,6 @@ class ProductDashboard < Administrate::BaseDashboard
     fats
     food_preference_products
     food_preferences
-    image_attachment
-    image_blob
     meal_products
     meals
     name

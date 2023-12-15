@@ -30,16 +30,17 @@ class User < ApplicationRecord
   def calculate_nutrition_plan
     self.nutrition_plans.destroy_all
 
-    breakfast = find_meals(:breakfast)
-    lunch = find_meals(:lunch)
-    dinner = find_meals(:dinner)
-
-    combinations = lunch.product(dinner).product(breakfast).map { |arr| arr.flatten.each_slice(2).to_a }
-                                                           .map { |arr| [arr.map { |a| a.first }, arr.sum { |meal| meal.second }] }
+    combinations = find_combinations
 
     (Date.today.beginning_of_week..Date.today.end_of_week).map do |day|
       plan_for_day = closest(combinations, target_calories)
-      # combinations.delete(plan_for_day)
+
+      if plan_for_day
+        combinations.delete(plan_for_day)
+      else
+        combinations = find_combinations
+        plan_for_day = closest(combinations, target_calories)
+      end
 
       plan = NutritionPlan.create!(user: self, name: day, day_of_reception: day, description: 'Автоматически созданный план питания')
       plan_for_day.first.each do |meal_id|
@@ -49,6 +50,15 @@ class User < ApplicationRecord
   end
 
   private
+
+  def find_combinations
+    breakfast = find_meals(:breakfast)
+    lunch = find_meals(:lunch)
+    dinner = find_meals(:dinner)
+
+    combinations = lunch.product(dinner).product(breakfast).map { |arr| arr.flatten.each_slice(2).to_a }
+                                                           .map { |arr| [arr.map { |a| a.first }, arr.sum { |meal| meal.second }] }
+  end
 
   def closest(data, target)
     return nil if data.empty?
