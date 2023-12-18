@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     @chart_data = current_user.weight_measures.pluck(:measure_date, :weight)
     @weight_measure = WeightMeasure.new
-    @nutrition_plans = current_user.nutrition_plans
+    @nutrition_plans = current_user.nutrition_plans_for_current_week
     @food_preference = current_user.food_preference
   end
 

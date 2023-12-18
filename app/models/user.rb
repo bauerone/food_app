@@ -49,6 +49,11 @@ class User < ApplicationRecord
     end
   end
 
+  def nutrition_plans_for_current_week
+    days_from_this_week = (Date.today.at_beginning_of_week..Date.today.at_end_of_week)
+    self.nutrition_plans.where(day_of_reception: days_from_this_week)
+  end
+
   private
 
   def find_combinations
